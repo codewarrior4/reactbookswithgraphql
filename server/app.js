@@ -1,9 +1,18 @@
 const express = require('express')
 const graphqlHTTP = require('express-graphql')
 const schema = require('./schema/schema')
+const mongoose = require('mongoose')
 
 const app = express()
 
+try {
+    mongoose.connect('mongodb+srv://codewarrior:etisalat123@cluster0.uqx2w.mongodb.net/test')
+    mongoose.connection.once('open',()=>{
+        console.log("Database connected")
+    })
+} catch (e) {
+    console.log("e ="+error)
+}
 app.use('/graphql',graphqlHTTP.graphqlHTTP({
     schema:schema,
     graphiql:true
